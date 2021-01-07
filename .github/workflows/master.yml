@@ -23,3 +23,8 @@ jobs:
       run: dotnet build --no-restore
     - name: dotnet publish
       run: dotnet publish --no-build
+    - name: Upload dotnet publish Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: CICDDemo
+        path: /home/runner/work/Playground/Playground/src/CICDDemo/bin/Debug/netcoreapp3.1/publish/
