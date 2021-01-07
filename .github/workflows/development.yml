@@ -1,0 +1,30 @@
+name: CICDDemo development workflow
+
+on:
+  push:
+    branches: [ development ]
+  pull_request:
+    branches: [ development ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration Debug
+    - name: dotnet publish
+      run: dotnet publish --no-build
+    - name: Upload dotnet publish Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: CICDDemo dev publish folder
+        path: CICDDemo/bin/Debug/netcoreapp3.1/publish/
