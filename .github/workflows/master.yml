@@ -20,11 +20,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration Release
     - name: dotnet publish
       run: dotnet publish --no-build
     - name: Upload dotnet publish Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: CICDDemo publish folder
+        name: CICDDemo master publish folder
         path: CICDDemo/bin/Debug/netcoreapp3.1/publish/
