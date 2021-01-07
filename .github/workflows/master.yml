@@ -27,4 +27,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: CICDDemo
-        path: /home/runner/work/Playground/Playground/src/CICDDemo/bin/Debug/netcoreapp3.1/publish
+        path: CICDDemo/bin/Debug/netcoreapp3.1/
