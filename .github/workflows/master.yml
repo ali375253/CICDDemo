@@ -27,4 +27,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: CICDDemo master publish folder
-        path: CICDDemo/bin/Release/
+        path: CICDDemo/bin/Release/netcoreapp3.1/publish/
