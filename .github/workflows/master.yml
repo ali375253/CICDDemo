@@ -26,5 +26,5 @@ jobs:
     - name: Upload dotnet publish Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: CICDDemo
-        path: CICDDemo/bin/Debug/netcoreapp3.1/
+        name: CICDDemo publish folder
+        path: CICDDemo/bin/Debug/netcoreapp3.1/publish/
