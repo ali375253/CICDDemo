@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: dotnet publish
-      run: dotnet publish --no-build --configuration Release
+      run: dotnet publish --configuration Release
     - name: Upload dotnet publish Artifact
       uses: actions/upload-artifact@v2
       with:
