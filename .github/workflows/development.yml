@@ -23,25 +23,15 @@ jobs:
       run: dotnet build --configuration Debug --no-restore
     - name: dotnet publish
       run: dotnet publish --configuration Debug
-
-  build_and_deploy:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup .NET
-      - uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 3.1.301
-      - name: Restore dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --no-restore
-      - name: dotnet publish
-        run: dotnet publish --configuration Debug
-      - name: Upload dotnet publish Artifact
-        uses: actions/upload-artifact@v2
-        with:
+    - name: Upload dotnet publish Artifact
+      uses: actions/upload-artifact@v2
+      with:
           name: CICDDemo dev publish folder
           path: CICDDemo/bin/Debug/netcoreapp3.1/publish/
+    - name: Stop Application
+      run: '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -allowUntrusted -source:recycleApp -dest:recycleApp="${{ env.WEBSITE_NAME }}",recycleMode="StopAppPool",computerName="${{ env.SERVER_NAME }}/msdeploy.axd?site=${{ env.WEBSITE_NAME }}",username="${{ env.USERNAME }}",password="${{ env.PASSWORD }}",AuthType="Basic"'
+    - name: Deploy Application
+      run: '"C:/Program Files (x86)/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -useCheckSum -allowUntrusted -source:contentPath="CICDDemo/bin/Debug/netcoreapp3.1/publish/" -dest:contentPath="${{ env.CONTENT_PATH }}",computerName="${{ env.SERVER_NAME }}/msdeploy.axd?site=${{ env.WEBSITE_NAME }}",username="${{ env.USERNAME }}",password="${{ env.PASSWORD }}",authtype="Basic"'
+    - name: Start Application Pool
+      run: '"C:/Program Files (x86)/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -allowUntrusted -source:recycleApp -dest:recycleApp="${{ env.WEBSITE_NAME }}",recycleMode="StartAppPool",computerName="${{ env.SERVER_NAME }}/msdeploy.axd?site=${{ env.WEBSITE_NAME }}",username="${{ env.USERNAME }}",password="${{ env.PASSWORD }}",AuthType="Basic"'
   
