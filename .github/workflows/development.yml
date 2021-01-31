@@ -23,10 +23,30 @@ jobs:
       run: dotnet build --configuration Debug --no-restore
     - name: dotnet publish
       run: dotnet publish --configuration Debug
-    - name: Upload dotnet publish Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: CICDDemo dev publish folder
-        path: CICDDemo/bin/Debug/netcoreapp3.1/publish/
-  
+
+  buildNdeploy:
+    runs-on: ubuntu-latest
+    env:
+      SERVER_NAME: ${{ secrets.SERVER_NAME }}
+      WEBSITE_NAME: ${{ secrets.WEBSITE_NAME }}
+      USERNAME: ${{ secrets.IIS_SERVER_USERNAME }}
+      PASSWORD: ${{ secrets.IIS_SERVER_PASSWORD }}
+      CONTENT_PATH: ${{ secrets.WEBSITE_CONTENT_PATH }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: dotnet publish
+        run: dotnet publish --configuration Debug
+      - name: Upload dotnet publish Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: CICDDemo dev publish folder
+          path: CICDDemo/bin/Debug/netcoreapp3.1/publish/
   
