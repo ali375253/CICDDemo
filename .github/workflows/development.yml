@@ -29,7 +29,7 @@ jobs:
           name: CICDDemo dev publish folder
           path: CICDDemo/bin/Debug/netcoreapp3.1/publish/
     - name: Stop Application
-      run: '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -allowUntrusted -source:recycleApp -dest:recycleApp="${{ env.WEBSITE_NAME }}",recycleMode="StopAppPool",computerName="${{ env.SERVER_NAME }}/msdeploy.axd?site=${{ env.WEBSITE_NAME }}",username="${{ env.USERNAME }}",password="${{ env.PASSWORD }}",AuthType="Basic"'
+      run: '"C:/Program Files (x86)/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -allowUntrusted -source:recycleApp -dest:recycleApp="${{ env.WEBSITE_NAME }}",recycleMode="StopAppPool",computerName="${{ env.SERVER_NAME }}/msdeploy.axd?site=${{ env.WEBSITE_NAME }}",username="${{ env.USERNAME }}",password="${{ env.PASSWORD }}",AuthType="Basic"'
     - name: Deploy Application
       run: '"C:/Program Files (x86)/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -useCheckSum -allowUntrusted -source:contentPath="CICDDemo/bin/Debug/netcoreapp3.1/publish/" -dest:contentPath="${{ env.CONTENT_PATH }}",computerName="${{ env.SERVER_NAME }}/msdeploy.axd?site=${{ env.WEBSITE_NAME }}",username="${{ env.USERNAME }}",password="${{ env.PASSWORD }}",authtype="Basic"'
     - name: Start Application Pool
