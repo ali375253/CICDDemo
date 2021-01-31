@@ -24,7 +24,7 @@ jobs:
     - name: dotnet publish
       run: dotnet publish --configuration Debug
 
-  buildNdeploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
     env:
       SERVER_NAME: ${{ secrets.SERVER_NAME }}
