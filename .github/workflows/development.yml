@@ -20,7 +20,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration debug --no-restore
+      run: dotnet build --no-restore
     - name: dotnet publish
       run: dotnet publish --configuration Debug
   
@@ -42,7 +42,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build --configuration debug --no-restore
+        run: dotnet build --no-restore
       - name: dotnet publish
         run: dotnet publish --configuration Debug
       - name: Upload dotnet publish Artifact
