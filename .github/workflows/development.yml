@@ -10,7 +10,12 @@ jobs:
   build:
 
     runs-on: windows-latest
-
+    env:
+      SERVER_NAME: ${{ secrets.SERVER_NAME }}
+      WEBSITE_NAME: ${{ secrets.WEBSITE_NAME }}
+      USERNAME: ${{ secrets.IIS_SERVER_USERNAME }}
+      PASSWORD: ${{ secrets.IIS_SERVER_PASSWORD }}
+      CONTENT_PATH: ${{ secrets.WEBSITE_CONTENT_PATH }}
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
