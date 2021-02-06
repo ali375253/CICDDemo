@@ -35,7 +35,7 @@ jobs:
           path: CICDDemo/bin/Debug/netcoreapp3.1/publish/
     - name: Stop Application
       shell: cmd
-      run: '"C:/Program Files/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -source:recycleApp -dest:recycleApp="${{ env.WEBSITE_NAME }}",computerName="${{ env.SERVER_NAME }},recycleMode="StopAppPool",authType="basic",username="${{ env.USERNAME }}",password="${{ env.PASSWORD }}" -allowUntrusted'
+      run: '"C:/Program Files/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -source:recycleApp -dest:recycleApp="${{ env.WEBSITE_NAME }}",computerName="${{ env.SERVER_NAME }},recycleMode="StopAppPool",authType="basic",username="${{ env.USERNAME }}",password="${{ env.PASSWORD }}" -allowUntrusted -allowUntrustedCertificate'
     - name: Deploy Application
       shell: cmd
       run: '"C:/Program Files/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -useCheckSum -allowUntrusted -source:contentPath="CICDDemo/bin/Debug/netcoreapp3.1/publish/" -dest:contentPath="${{ env.CONTENT_PATH }}",computerName="${{ env.SERVER_NAME }}/msdeploy.axd?site=${{ env.WEBSITE_NAME }}",username="${{ env.USERNAME }}",password="${{ env.PASSWORD }}"'
